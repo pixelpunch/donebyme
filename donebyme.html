@@ -1,0 +1,48 @@
+<head>
+  <title>TODOS - donebyme</title>
+</head>
+
+<body>
+
+
+<div class = "container">
+  
+   {{> TodosPanel}}
+      
+</div>
+ 
+</body>
+
+
+<template name="TodosPanel">
+  <div class="todos-panel">
+    {{> CreateTodoItem}}
+     <ul class="todos-list">
+        {{#each items}}
+          <li class="todo-item {{isDoneClass}}"> 
+             {{> TodoItem}}
+          </li>
+        {{/each}}  
+     </ul>
+    </div>
+</template>
+
+<template name="TodoItem">
+   <div class="done">
+       <input type="checkbox" name="is_done" {{isDoneChecked}} />
+   </div>
+   
+   <div class="subject">
+       {{subject}}    
+   </div>
+    
+</template>
+
+<template name="CreateTodoItem">
+   <form class="create-todo">
+      <input type="text" placeholder="Create a new Todo.."/>   
+   </form>
+    
+</template>
+
+
