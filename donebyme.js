@@ -33,6 +33,16 @@ if (Meteor.isClient) {
                 }             
             });
         
+        },
+        'click [name=is_removed]': function(e, tmpl){
+            var id = this._id
+            var isRemoved = tmpl.find('input').checked;
+            Todos.remove({_id:id}, {
+                $set:{
+                    is_removed:isRemoved
+                }             
+            });
+        
         }
 
     });

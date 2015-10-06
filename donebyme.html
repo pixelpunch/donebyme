@@ -27,7 +27,7 @@
           </li>
           {{else}}
           <li class="todo-item empty">
-           No todo item yet..      
+              
           </li>
         {{/each}}  
      </ul>
@@ -39,11 +39,15 @@
    <div class="done">
        <input type="checkbox" name="is_done" {{isDoneChecked}} />
    </div>
-   
    <div class="subject">
        {{subject}}    
     </div>
+    <div class="remove">
+       <input type="checkbox" name="is_removed" {{isRemoved}} />
+   </div>
 </template>
+
+
 
 <template name="CreateTodoItem">
    <form class="create-todo">
@@ -57,7 +61,12 @@
 
 <template name="TodosCount">
     <div class=todos-count>
+    {{#if currentUser}}
     {{completedCount}} / {{totalCount}} todos completed
+    {{else}}
+    <li class="todo-item empty">Welcome to Alok's magnificient Todo App!!
+    </li>
+    {{/if}}
     </div>
 </template>
 
