@@ -6,7 +6,9 @@
 
 
 <div class = "container">
-  
+  <div class="login">
+    {{> loginButtons}}    
+ </div>
    {{> TodosPanel}}
       
 </div>
@@ -15,12 +17,17 @@
 
 
 <template name="TodosPanel">
+
   <div class="todos-panel">
     {{> CreateTodoItem}}
      <ul class="todos-list">
         {{#each items}}
           <li class="todo-item {{isDoneClass}}"> 
              {{> TodoItem}}
+          </li>
+          {{else}}
+          <li class="todo-item empty">
+           No todo item yet..      
           </li>
         {{/each}}  
      </ul>
@@ -40,7 +47,11 @@
 
 <template name="CreateTodoItem">
    <form class="create-todo">
-      <input type="text" placeholder="Create a new Todo.."/>   
+     {{#if currentUser}}
+     <input type="text" placeholder="Create a new Todo.."/>  
+     {{else}}
+     <input type="text" readonly placeholder="Sign in to create a new Todo.."/>  
+     {{/if}}    
    </form>
 </template>
 
