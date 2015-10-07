@@ -7,12 +7,12 @@
 
 <div class = "container">
   <div class="login">
-    {{> loginButtons}}    
+    {{> loginButtons}}
  </div>
    {{> TodosPanel}}
-      
+
 </div>
- 
+
 </body>
 
 
@@ -22,14 +22,14 @@
     {{> CreateTodoItem}}
      <ul class="todos-list">
         {{#each items}}
-          <li class="todo-item {{isDoneClass}}"> 
+          <li class="todo-item {{isDoneClass}}">
              {{> TodoItem}}
           </li>
           {{else}}
           <li class="todo-item empty">
-              
+
           </li>
-        {{/each}}  
+        {{/each}}
      </ul>
      {{> TodosCount}}
     </div>
@@ -40,7 +40,7 @@
        <input type="checkbox" name="is_done" {{isDoneChecked}} />
    </div>
    <div class="subject">
-       {{subject}}    
+       {{subject}}
     </div>
     <div class="remove">
        <button type="button" class="btn btn-info btn-xs" name="is_removed" {{isRemoved}}>Remove
@@ -53,10 +53,10 @@
 <template name="CreateTodoItem">
    <form class="create-todo">
      {{#if currentUser}}
-     <input type="text" placeholder="Create a new Todo.."/>  
+     <input type="text" placeholder="Create a new Todo.."/>
      {{else}}
-     <input type="text" readonly placeholder="Sign in to create a new Todo.."/>  
-     {{/if}}    
+     <input type="text" readonly placeholder="Sign in to create a new Todo.."/>
+     {{/if}}
    </form>
 </template>
 

@@ -10,19 +10,19 @@ if (Meteor.isClient) {
               }
             });
         },
-        
+
         isDoneClass: function(){
             return this.is_done ? 'done': '';
         }
     });
-    
+
     Template.TodoItem.helpers({
         isDoneChecked: function(){
            return this.is_done ? 'checked' : '';
         }
-    
+
     });
-    
+
     Template.TodoItem.events({
         'click [name=is_done]': function(e, tmpl){
             var id = this._id
@@ -30,9 +30,9 @@ if (Meteor.isClient) {
             Todos.update({_id:id}, {
                 $set:{
                     is_done:isDone
-                }             
+                }
             });
-        
+
         },
         'click [name=is_removed]': function(e, tmpl){
             var id = this._id
@@ -40,17 +40,17 @@ if (Meteor.isClient) {
             Todos.remove({_id:id}, {
                 $set:{
                     is_removed:isRemoved
-                }             
+                }
             });
-        
+
         }
 
     });
-    
+
     Template.CreateTodoItem.events({
         'submit form': function(e, tmpl){
             e.preventDefault();
-            
+
             var subject = tmpl.find('input').value;
             Todos.insert({
                 subject: subject,
@@ -59,12 +59,12 @@ if (Meteor.isClient) {
                 user_id: Meteor.userId()
             });
             var form = tmpl.find('form');
-            
+
             form.reset();
         }
-    
+
     });
-    
+
     Template.TodosCount.helpers({
         completedCount: function(){
            return Todos.find({is_done:true}).count();
@@ -72,31 +72,31 @@ if (Meteor.isClient) {
         totalCount: function(){
            return Todos.find({}).count();
         }
-        
-    
+
+
     });
-     
+
 }
 
 if (Meteor.isServer) {
     Meteor.publish('todos', function(){
         return Todos.find({user_id: this.userId});
     })
-    
+
     Todos.allow({
     insert: function(userId, doc){
         return userId;
     },
-    
+
     update: function(userId, doc, fieldNames, modifier){
         return doc.user_id === userId;
     },
-    
+
     remove: function(userId, doc){
         return doc.user_id === userId;
     }
-    
-    
+
+
     });
-    
+
 }
